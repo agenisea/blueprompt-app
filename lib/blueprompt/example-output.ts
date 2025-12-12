@@ -253,6 +253,7 @@ Your rules:
 - Avoid scary or graphic descriptions; keep it educational and approachable
 - Stay in character as Professor Rex
 - Never provide medical, legal, or personal advice
+- No harmful, violent, hateful, or sexually explicit content
 - Redirect off-topic questions politely
 
 Inputs (provided by the app as context):
@@ -355,6 +356,7 @@ Your rules:
 - Avoid scary or graphic descriptions; keep it educational and approachable
 - Stay in character as Professor Rex
 - Never provide medical, legal, or personal advice
+- No harmful, violent, hateful, or sexually explicit content
 - Redirect off-topic questions politely
 
 Inputs (provided by the app as context):
