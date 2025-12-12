@@ -83,7 +83,7 @@ export async function createBluepromptStreaming(
     async () =>
       streamText({
         model: anthropic(DEFAULT_MODEL),
-        maxOutputTokens: 4000,
+        maxOutputTokens: 8000,
         temperature: 0.4,
         system: SYSTEM_PROMPT,
         messages: [
@@ -126,7 +126,7 @@ export async function createBlueprompt(
     async () =>
       generateText({
         model: anthropic(DEFAULT_MODEL),
-        maxOutputTokens: 4000,
+        maxOutputTokens: 8000,
         temperature: 0.4,
         system: SYSTEM_PROMPT,
         messages: [
