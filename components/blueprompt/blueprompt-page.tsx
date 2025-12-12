@@ -96,7 +96,6 @@ export function BluepromptPage() {
           } else if (update.phase === STREAMING_PHASE.COMPLETE && update.result) {
             setOutput(update.result)
             setStreamingText('')
-            clearDraft()
           } else if (update.phase === STREAMING_PHASE.ERROR) {
             setError(update.error ?? 'Creation failed')
           }
