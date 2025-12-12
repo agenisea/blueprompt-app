@@ -15,7 +15,7 @@ export function AboutSheet({ open, onOpenChange }: AboutSheetProps) {
           <SheetTitle>About Blueprompt</SheetTitle>
           <SheetDescription>Learn what Blueprompt does and how to use it</SheetDescription>
         </SheetHeader>
-        <div className="mt-4 space-y-4 px-6 text-sm text-foreground/90">
+        <div className="space-y-4 px-6 text-sm text-foreground/90">
           <p>
             Blueprompt is a blueprint and prompt creator for no-code apps and agentic systems.
           </p>

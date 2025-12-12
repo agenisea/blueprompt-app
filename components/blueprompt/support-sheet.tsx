@@ -21,7 +21,7 @@ export function SupportSheet({ open, onOpenChange }: SupportSheetProps) {
           <SheetTitle>Support Blueprompt</SheetTitle>
           <SheetDescription>Help keep the project running</SheetDescription>
         </SheetHeader>
-        <div className="mt-1 space-y-4 px-6 pb-10 text-sm text-muted-foreground">
+        <div className="space-y-4 px-6 pb-10 text-sm text-muted-foreground">
           <p>
             Each prompt uses paid AI infrastructure. If this helped, you can support the
             next one.
