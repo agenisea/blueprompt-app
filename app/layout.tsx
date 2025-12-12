@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: `${WEBSITE_URL}/opengraph-image`,
+        url: `${WEBSITE_URL}/opengraph-image?v=1`,
         width: 1200,
         height: 630,
         alt: 'Blueprompt — No-Code App & Agent Prompt Creator',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blueprompt',
     description: 'Turn a single idea into a no-code app blueprint and agentic prompt.',
-    images: [`${WEBSITE_URL}/opengraph-image`],
+    images: [`${WEBSITE_URL}/opengraph-image?v=1`],
   },
 }
 

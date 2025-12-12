@@ -36,7 +36,7 @@ export default async function Image() {
         >
           <div
             style={{
-              fontSize: 96,
+              fontSize: 105,
               fontWeight: 700,
               color: '#ffffff',
               letterSpacing: '-0.02em',
@@ -55,7 +55,7 @@ export default async function Image() {
               border: '1px solid rgba(255, 255, 255, 0.2)',
             }}
           >
-            beta
+            BETA
           </div>
         </div>
 
@@ -65,9 +65,9 @@ export default async function Image() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            fontSize: 36,
+            fontSize: 40,
             fontWeight: 400,
-            color: '#a1a1aa',
+            color: '#ffffff',
             letterSpacing: '-0.01em',
             textAlign: 'center',
             maxWidth: 900,
@@ -84,14 +84,14 @@ export default async function Image() {
             display: 'flex',
             gap: 24,
             marginTop: 48,
-            fontSize: 24,
-            color: '#71717a',
+            fontSize: 30,
+            color: '#ffffff',
           }}
         >
           <span>v0</span>
-          <span style={{ color: '#3f3f46' }}>•</span>
+          <span style={{ color: '#ffffff' }}>•</span>
           <span>Lovable</span>
-          <span style={{ color: '#3f3f46' }}>•</span>
+          <span style={{ color: '#ffffff' }}>•</span>
           <span>Replit</span>
         </div>
       </div>
