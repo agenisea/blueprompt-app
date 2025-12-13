@@ -1,7 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { Github } from 'lucide-react'
+import Link from 'next/link'
+import { Claude } from '@lobehub/icons'
 import { Button } from '@/components/ui/button'
 import { COPY_TEXT, STRIPE_PAYMENT_LINK } from '@/lib/blueprompt/constants'
 
@@ -16,7 +17,7 @@ export function BluepromptHeader({ onOpenAbout, onOpenSupport }: BluepromptHeade
   return (
     <header className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-end sm:items-start gap-3">
+        <Link href="/" className="flex items-end sm:items-start gap-3 hover:opacity-80 transition-opacity">
           <Image
             src="/logo.png"
             alt="Blueprompt Logo"
@@ -26,24 +27,43 @@ export function BluepromptHeader({ onOpenAbout, onOpenSupport }: BluepromptHeade
             priority
           />
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-            <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-primary">
+            <h1 className="hidden sm:block text-lg sm:text-xl font-semibold tracking-tight text-primary">
               {COPY_TEXT.headerTitle}
             </h1>
             <span className="w-fit rounded-full bg-primary/10 px-2 py-0.5 text-[10px] uppercase tracking-wide text-primary">
               {COPY_TEXT.headerBadge}
             </span>
           </div>
-        </div>
+        </Link>
         <div className="flex shrink-0 items-center gap-2">
+          <a
+            href="/claude-code"
+            className="mr-1 opacity-100 hover:opacity-80 transition-opacity"
+            aria-label="Use with Claude Code"
+            title="Use with Claude Code"
+          >
+            <span className="pointer-events-none">
+              <Claude size={20} color="black" />
+            </span>
+          </a>
           <a
             href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-2"
+            className="mr-2 text-foreground hover:text-foreground/80 transition-colors"
             aria-label="View on GitHub"
+            title="View on GitHub"
           >
-            <Github className="size-5 text-black" fill="black" />
+            <svg
+              className="size-5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
           </a>
+
           <Button size="sm" onClick={onOpenAbout}>
             About
           </Button>
