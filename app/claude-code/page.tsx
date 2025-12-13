@@ -35,9 +35,20 @@ export default function ClaudeCodePage() {
               </h1>
             </div>
 
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-4">
               Run Blueprompt directly from your terminal as a Claude Code slash command.
               Generate structured app blueprints and agent prompts without leaving your workflow.
+            </p>
+
+            <p className="text-sm text-muted-foreground mb-8">
+              <a
+                href="/blueprompt-instructions.md"
+                download="blueprompt-instructions.md"
+                className="text-foreground underline underline-offset-2 hover:text-foreground/80"
+              >
+                Download instructions
+              </a>
+              {' '}for offline reference.
             </p>
 
             {/* Installation */}

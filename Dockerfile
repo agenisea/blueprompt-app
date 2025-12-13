@@ -64,8 +64,8 @@ RUN chown -R nginx:nginx /var/lib/nginx /var/log/nginx /run/nginx
 # Copy public assets
 COPY --from=builder /app/public ./public
 
-# Allow nginx to read blueprompt.md for direct serving
-RUN chmod 644 ./public/blueprompt.md
+# Allow nginx to read markdown files for direct serving
+RUN chmod 644 ./public/blueprompt.md ./public/blueprompt-instructions.md
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
