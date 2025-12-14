@@ -299,11 +299,7 @@
   }
 
   .skip-link {
-    @apply absolute -left-[9999px] w-px h-px overflow-hidden bg-primary text-primary-foreground p-2 no-underline rounded z-[1000] text-sm;
-  }
-
-  .skip-link:focus-visible {
-    @apply left-1.5 top-1.5 w-auto h-auto overflow-visible;
+    @apply sr-only;
   }
 }
 
