@@ -67,7 +67,72 @@ A standalone system prompt for AI agents:
 - Rules and guardrails
 - Input/output specifications
 
-## Getting Started
+## Use with Claude Code
+
+Run Blueprompt directly from your terminal as a Claude Code slash command. Create structured app blueprints and agent prompts without leaving your workflow.
+
+### Installation
+
+```bash
+# Install globally (available in all projects)
+curl -o ~/.claude/commands/blueprompt.md https://blueprompt.app/blueprompt.md
+
+# Or install per-project
+mkdir -p .claude/commands && curl -o .claude/commands/blueprompt.md https://blueprompt.app/blueprompt.md
+```
+
+> **Download full instructions:** [blueprompt-instructions.md](https://blueprompt.app/blueprompt-instructions.md)
+
+### Usage
+
+```
+/blueprompt
+```
+
+Then describe your idea:
+
+```
+What: A habit tracking app for developers
+
+Who: Solo developers, bootcamp grads
+
+Goal: Build daily coding habits with streaks and reminders
+
+Constraints: MVP only, no backend yet
+
+Target: v0
+```
+
+### What It Creates
+
+Blueprompt generates three outputs tailored to your target builder:
+
+1. **Full Blueprompt** — Detailed specs with core concept, user flows, screens, data model, and agent design
+2. **App-Only Prompt** — Condensed, copy-paste ready prompt for your builder
+3. **Agent-Only Prompt** — Standalone system prompt for AI agent configuration
+
+### Supported Targets
+
+| Target | Description |
+|--------|-------------|
+| `v0` | UI-focused, component-level specs for Vercel's v0 |
+| `lovable` | Full-stack specs for Lovable.dev |
+| `replit` | Code-centric specs for Replit Agent |
+| `generic` | Tool-agnostic, concept-first output |
+
+### Token-Saving Workflow
+
+For users on minimal Claude Code subscriptions, Blueprompt enables an efficient workflow:
+
+1. **Generate** — Run `/blueprompt` to create your app spec (minimal tokens)
+2. **Build** — Copy the prompt to v0, Lovable, or Replit to build the app (no Claude tokens)
+3. **Refine** — Return to Claude Code to debug and iterate (targeted token usage)
+
+This offloads the heavy lifting to no-code builders, saving Claude Code tokens for what it does best—debugging and refinement.
+
+Full instructions: [blueprompt.app/claude-code](https://blueprompt.app/claude-code)
+
+## Getting Started (Web App)
 
 ### Prerequisites
 
@@ -116,6 +181,7 @@ Open [http://localhost:3000](http://localhost:3000) to use Blueprompt.
 ```
 ├── app/                    # Next.js app router
 │   ├── api/blueprompt/     # API routes
+│   ├── claude-code/        # Claude Code integration page
 │   ├── layout.tsx          # Root layout with metadata
 │   ├── page.tsx            # Home page
 │   └── opengraph-image.tsx # Dynamic OG image
@@ -131,6 +197,9 @@ Open [http://localhost:3000](http://localhost:3000) to use Blueprompt.
 │   ├── resilience/         # Retry logic with jitter
 │   ├── security/           # CSRF protection
 │   └── streaming/          # SSE streaming utilities
+├── public/
+│   ├── blueprompt.md       # Claude Code slash command
+│   └── blueprompt-instructions.md # Installation instructions
 ├── tests/                  # Test files
 └── types/                  # TypeScript type definitions
 ```
@@ -170,4 +239,4 @@ If Blueprompt helps you build something, consider [supporting the project](https
 
 ---
 
-Built by [Agenisea](https://agenisea.ai) 🪼
+Built by [Agenisea™](https://agenisea.ai) 🪼

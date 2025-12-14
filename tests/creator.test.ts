@@ -135,7 +135,7 @@ describe('createBlueprompt', () => {
     expect(generateText).toHaveBeenCalledWith(
       expect.objectContaining({
         model: 'mock-model',
-        maxOutputTokens: 4000,
+        maxOutputTokens: 8000,
         temperature: 0.4,
       })
     )
@@ -234,7 +234,7 @@ describe('createBluepromptStreaming', () => {
     expect(streamText).toHaveBeenCalledWith(
       expect.objectContaining({
         model: 'mock-model',
-        maxOutputTokens: 4000,
+        maxOutputTokens: 8000,
         temperature: 0.4,
       })
     )

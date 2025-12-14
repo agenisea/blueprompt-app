@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     template: '%s | Blueprompt',
   },
   description: 'Turn a single idea into a no-code app blueprint and agentic prompt.',
+  authors: [{ name: 'Patrick Peña', url: 'https://www.linkedin.com/in/ppenasb/' }],
+  creator: 'Patrick Peña',
   alternates: {
     canonical: '/',
   },
@@ -52,6 +54,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  publisher: 'Agenisea™',
   twitter: {
     card: 'summary_large_image',
     title: 'Blueprompt',
