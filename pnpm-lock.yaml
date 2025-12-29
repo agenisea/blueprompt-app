@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@agenisea/sse-kit':
+        specifier: ^0.1.2
+        version: 0.1.2(react@19.2.1)
       '@ai-sdk/anthropic':
         specifier: ^2.0.55
         version: 2.0.55(zod@3.25.76)
@@ -92,6 +95,15 @@ importers:
         version: 4.0.15(@opentelemetry/api@1.9.0)(@types/node@22.19.2)(jiti@2.6.1)(lightningcss@1.30.2)
 
 packages:
+
+  '@agenisea/sse-kit@0.1.2':
+    resolution: {integrity: sha512-3MyRqfAE5980jKOLn8f3jl4hW0a7bJ2X5P7DqQd176tMilYB2I3N0Ds6ACxhyIuveS7N8dJUVDB93lha2Mu93g==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@ai-sdk/anthropic@2.0.55':
     resolution: {integrity: sha512-jKOfnEntcR39Wd9b2MUEP2r6ucMyuzY2EYRH1lQzTcZutmEmHxXlIZD17OseFuhuYCKKBlQUBi8GyEl8/qB4qg==}
@@ -3895,8 +3907,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  rc-segmented@2.7.0:
-    resolution: {integrity: sha512-liijAjXz+KnTRVnxxXG2sYDGd6iLL7VpGGdR8gwoxAXy2KglviKCxLWZdjKYJzYzGSUwKDSTdYk8brj54Bn5BA==}
+  rc-segmented@2.7.1:
+    resolution: {integrity: sha512-izj1Nw/Dw2Vb7EVr+D/E9lUTkBe+kKC+SAFSU9zqr7WV2W5Ktaa9Gc7cB2jTqgk8GROJayltaec+DBlYKc6d+g==}
     peerDependencies:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
@@ -4804,6 +4816,10 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@agenisea/sse-kit@0.1.2(react@19.2.1)':
+    optionalDependencies:
+      react: 19.2.1
 
   '@ai-sdk/anthropic@2.0.55(zod@3.25.76)':
     dependencies:
@@ -6760,7 +6776,7 @@ snapshots:
       rc-progress: 4.0.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       rc-rate: 2.13.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       rc-resize-observer: 1.4.3(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
-      rc-segmented: 2.7.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      rc-segmented: 2.7.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       rc-select: 14.16.8(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       rc-slider: 11.1.9(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       rc-steps: 6.0.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -9413,7 +9429,7 @@ snapshots:
       react-dom: 19.2.1(react@19.2.1)
       resize-observer-polyfill: 1.5.1
 
-  rc-segmented@2.7.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  rc-segmented@2.7.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
       '@babel/runtime': 7.28.4
       classnames: 2.5.1

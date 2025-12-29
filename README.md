@@ -174,6 +174,7 @@ Open [http://localhost:3000](http://localhost:3000) to use Blueprompt.
 - **Styling**: Tailwind CSS 4
 - **UI Components**: Radix UI
 - **AI**: Anthropic Claude API
+- **Streaming**: @agenisea/sse-kit
 - **Fonts**: Geist Sans & Mono
 
 ## Project Structure

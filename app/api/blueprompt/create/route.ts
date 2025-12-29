@@ -10,7 +10,9 @@ import { validateOrigin, getAllowedOrigins } from '@/lib/security/csrf'
 import {
   createStreamingResponse,
   createSSEResponse,
+  STREAMING_PHASE,
 } from '@/lib/streaming/server'
+import type { StreamUpdate } from '@/lib/streaming/types'
 
 const inputSchema = bluepromptInputSchema
 
@@ -92,13 +94,19 @@ export async function POST(request: NextRequest): Promise<Response> {
   console.log('[API] Input:', input)
 
   if (shouldStream) {
-    const { stream, orchestrator } = createStreamingResponse()
+    const { stream, orchestrator } = createStreamingResponse<StreamUpdate>({
+      completePhase: STREAMING_PHASE.COMPLETE,
+      errorPhase: STREAMING_PHASE.ERROR,
+    })
 
     orchestrator.startHeartbeat()
 
     createBluepromptStreaming(input, {
       onDelta: (text) => {
-        orchestrator.sendDelta(text)
+        orchestrator.sendUpdate({
+          phase: STREAMING_PHASE.CREATING,
+          delta: text,
+        })
       },
     })
       .then(({ output, usage }) => {

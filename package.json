@@ -1,6 +1,6 @@
 {
   "name": "blueprompt-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn a single idea into a no-code app blueprint and agentic prompt",
   "license": "MIT",
   "repository": {
@@ -16,6 +16,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@agenisea/sse-kit": "^0.1.2",
     "@ai-sdk/anthropic": "^2.0.55",
     "@lobehub/icons": "^2.45.0",
     "@radix-ui/react-accordion": "^1.2.12",

@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { BluepromptInput, BluepromptOutput } from '@/types/blueprompt'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import { createSSEParser } from '@/lib/streaming/client'
-import { STREAMING_PHASE } from '@/lib/streaming/constants'
+import { useSSEStream } from '@/lib/streaming/client'
+import { STREAMING_PHASE, type StreamingPhase } from '@/lib/streaming/constants'
+import type { StreamUpdate } from '@/lib/streaming/types'
 import { BluepromptHeader } from './blueprompt-header'
 import { BluepromptForm } from './blueprompt-form'
 import { BluepromptOutputPanel } from './blueprompt-output'
@@ -26,12 +27,56 @@ export function BluepromptPage() {
   const [input, setInput, clearDraft] = useLocalStorage<BluepromptInput>(STORAGE_KEY, DEFAULT_INPUT)
   const [output, setOutput] = useState<BluepromptOutput | null>(null)
   const [streamingText, setStreamingText] = useState<string>('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const accumulatedTextRef = useRef<string>('')
 
   const [aboutOpen, setAboutOpen] = useState(false)
   const [supportOpen, setSupportOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<'input' | 'output'>('input')
+
+  const { state, start, reset: resetStream } = useSSEStream<
+    BluepromptInput,
+    BluepromptOutput,
+    StreamUpdate,
+    StreamingPhase
+  >({
+    endpoint: '/api/blueprompt/create',
+    method: 'POST',
+    streamQueryParam: true,
+    initialPhase: STREAMING_PHASE.CREATING,
+    completePhase: STREAMING_PHASE.COMPLETE,
+    errorPhase: STREAMING_PHASE.ERROR,
+    extractResult: (update) => update.result,
+    extractError: (update) => update.error,
+    isComplete: (update) => update.phase === STREAMING_PHASE.COMPLETE,
+    isError: (update) => update.phase === STREAMING_PHASE.ERROR,
+    onUpdate: (update) => {
+      if (update.phase === STREAMING_PHASE.CREATING && update.delta) {
+        accumulatedTextRef.current += update.delta
+        setStreamingText(accumulatedTextRef.current)
+      }
+    },
+    onComplete: (result) => {
+      setOutput(result)
+      setStreamingText('')
+      accumulatedTextRef.current = ''
+    },
+    onError: (error) => {
+      // Preserve partial content on error
+      if (accumulatedTextRef.current.trim()) {
+        setOutput({
+          fullPrompt: accumulatedTextRef.current.trim(),
+          appOnlyPrompt: null,
+          agentOnlyPrompt: null,
+        })
+        setStreamingText('')
+      }
+      console.error('[SSE] Stream error:', error)
+    },
+    warnOnUnload: true,
+  })
+
+  const loading = state.isStreaming
+  const error = state.error
 
   const hasContent = loading || output !== null || error !== null
 
@@ -45,8 +90,9 @@ export function BluepromptPage() {
   function handleTryExample(exampleInput: BluepromptInput, exampleOutput: BluepromptOutput) {
     setInput(exampleInput)
     setOutput(exampleOutput)
-    setError(null)
+    resetStream()
     setStreamingText('')
+    accumulatedTextRef.current = ''
     setActiveTab('output')
   }
 
@@ -54,79 +100,17 @@ export function BluepromptPage() {
     setInput(DEFAULT_INPUT)
     clearDraft()
     setOutput(null)
-    setError(null)
+    resetStream()
     setStreamingText('')
+    accumulatedTextRef.current = ''
     setActiveTab('input')
   }
 
   async function handleGenerate() {
-    setLoading(true)
-    setError(null)
     setOutput(null)
     setStreamingText('')
-
-    let accumulatedText = ''
-
-    try {
-      const res = await fetch('/api/blueprompt/create?stream=true', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-      })
-
-      if (!res.ok) {
-        const data = await res.json()
-        setError(data.error ?? 'Something went wrong.')
-        return
-      }
-
-      const reader = res.body?.getReader()
-      if (!reader) {
-        setError('Streaming not supported')
-        return
-      }
-
-      const decoder = new TextDecoder()
-
-      const parser = createSSEParser({
-        onMessage: (update) => {
-          if (update.phase === STREAMING_PHASE.CREATING && update.delta) {
-            accumulatedText += update.delta
-            setStreamingText(accumulatedText)
-          } else if (update.phase === STREAMING_PHASE.COMPLETE && update.result) {
-            setOutput(update.result)
-            setStreamingText('')
-          } else if (update.phase === STREAMING_PHASE.ERROR) {
-            setError(update.error ?? 'Creation failed')
-          }
-        },
-        onError: (err) => {
-          console.error('[SSE] Parse error:', err)
-        },
-      })
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        parser(decoder.decode(value, { stream: true }))
-      }
-    } catch (err) {
-      console.error(err)
-      // Preserve partial content on network error so user can copy it
-      if (accumulatedText.trim()) {
-        setOutput({
-          fullPrompt: accumulatedText.trim(),
-          appOnlyPrompt: null,
-          agentOnlyPrompt: null,
-        })
-        setStreamingText('')
-        setError('Network error interrupted creation, see partial content below.')
-      } else {
-        setError('Network error. Please try again.')
-      }
-    } finally {
-      setLoading(false)
-    }
+    accumulatedTextRef.current = ''
+    await start(input)
   }
 
   return (
