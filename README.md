@@ -240,4 +240,4 @@ If Blueprompt helps you build something, consider [supporting the project](https
 
 ---
 
-Built by [Agenisea™](https://agenisea.ai) 🪼
+Built by Agenisea™ 🪼 • [AI Native Systems™](https://ainativesystems.io)
